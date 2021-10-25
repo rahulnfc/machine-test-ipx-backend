@@ -45,31 +45,29 @@ module.exports = {
         try {
             const increment = await UserHelper.addToCart(req.body);
             const cart = await UserHelper.cartProducts(req.body.userId);
-            console.log(cart, 'cart')
-            console.log(increment, 'addCart')
-            res.status(200).json({cart, increment});
+            res.status(200).json({ cart, increment });
         } catch (error) {
             console.log(error);
         }
     },
     cartdecrement: async (req, res) => {
-        const{ userId, productId } = req.body;
+        const { userId, productId } = req.body;
         try {
             const decrement = await UserHelper.cartdecrement(userId, productId);
             const cart = await UserHelper.cartProducts(req.body.userId);
             console.log(cart);
-            res.status(200).json({cart, decrement});
+            res.status(200).json({ cart, decrement });
         } catch (error) {
             console.log(error);
         }
     },
     cartdelete: async (req, res) => {
-        const{ userId, productId } = req.body;
+        const { userId, productId } = req.body;
         try {
             const deleteCart = await UserHelper.deleteCart(userId, productId);
             const cart = await UserHelper.cartProducts(req.body.userId);
             const count = await UserHelper.cartCount(userId);
-            res.status(200).json({cart, deleteCart, count});
+            res.status(200).json({ cart, deleteCart, count });
         } catch (error) {
             console.log(error);
         }

@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 module.exports = {
     getUser: async (userId) => {
         try {
-            const user = await User.findOne({ where: { id: userId } }).select('-password');
+            const user = await User.findById(userId);
             return user;
         } catch (err) {
             throw err;
@@ -46,7 +46,6 @@ module.exports = {
         }
     },
     cartProducts: async (userId) => {
-        console.log(userId, 'userId');
         try {
             // get the cart details and products details by userId
             const cartProducts = await User.aggregate([
@@ -70,7 +69,6 @@ module.exports = {
                     }
                 }
             ]);
-            console.log(cartProducts, 'cartProducts');
             return cartProducts;
         } catch (err) {
             throw err;
